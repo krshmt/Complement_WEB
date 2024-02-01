@@ -7,155 +7,167 @@
     <script src="main.js" defer></script>
     <title>Demo JS</title>
   </head>
-  <script>
-    /**
-     * DATA
-     */
-    let events = [
-      {
-        type: "sport",
-        sport: "basket",
-        teamA: "OLB",
-        teamB: "LA ROCHELLE",
-        date: "2023-12-25",
-      },
-      {
-        type: "sport",
-        sport: "foot",
-        teamA: "USO",
-        teamB: "PSG",
-        date: "2024-01-10",
-      },
-      {
-        type: "concert",
-        artist: "Machin",
-        date: "2024-01-10",
-      },
-    ];
-
-    class Event {
-      #_date;
-      #_type;
-
-      constructor(date, type) {
-        if (type === "") {
-          throw new Error("Le type ne peut pas être vide");
+  <body>
+    <script>
+      let events = [
+        {
+          type: "sport",
+          sport: "basket",
+          teamA: "OLB",
+          teamB: "LA ROCHELLE",
+          date: "2023-12-25",
+        },
+        {
+          type: "sport",
+          sport: "foot",
+          teamA: "USO",
+          teamB: "PSG",
+          date: "2024-01-10",
+        },
+        {
+          type: "concert",
+          artist: "Machin",
+          date: "2024-01-10",
+        },
+        {
+          type: "cours",
+          professeur: "Leni Chabilan",
+          matiere: "Programmation Système",
+          date: "2024-01-10",
         }
-        let eventDate = new Date(date);
-        if (!(eventDate instanceof Date)) {
-          throw new Error("Mauvais format de date");
+      ];
+
+      class Event {
+        #_date;
+        #_type;
+
+        constructor(date, type) {
+          if (type === "") {
+            throw new Error("Le type ne peut pas être vide");
+          }
+          let eventDate = new Date(date);
+          if (!(eventDate instanceof Date)) {
+            throw new Error("Mauvais format de date");
+          }
+          this.#_date = eventDate;
+          this.#_type = type;
         }
-        this.#_date = eventDate;
-        this.#_type = type;
-      }
 
-      get laDate() {
-        return this.#_date;
-      }
-
-      get affichage() {
-        return this.#_type;
-      }
-    }
-
-    class ConcertEvent extends Event {
-      #_artiste;
-
-      constructor(date, artiste) {
-        super(date, "Concert de");
-        if (artiste === "") {
-          throw new Error("L'artiste ne peut pas être vide");
+        get laDate() {
+          return this.#_date;
         }
-        this.#_artiste = artiste;
-      }
 
-      get artiste() {
-        return this.#_artiste;
-      }
-
-      get affichage() {
-        return `${super.affichage} ${this.#_artiste}.`;
-      }
-    }
-
-    class SportEvent extends Event {
-      #_equipeA;
-      #_equipeB;
-      #_sport;
-
-      constructor(sport, equipeA, equipeB, date) {
-        super(date, "Rencontre de");
-        if (sport === "") {
-          throw new Error("Le sport ne peut pas être vide");
-        }
-        this.#_sport = sport;
-        this.#_equipeA = equipeA;
-        this.#_equipeB = equipeB;
-      }
-
-      get sport() {
-        return this.#_sport;
-      }
-
-      get affichage() {
-        return `${super.affichage} ${this.#_sport} entre ${this.#_equipeA} et ${
-          this.#_equipeB
-        }.`;
-      }
-    }
-
-    class EventFactory {
-      constructor(type, data) {
-        switch (type) {
-          case "concert":
-            return new ConcertEvent(data.date, data.artiste);
-            break;
-          case "sport":
-            return new SportEvent(
-              data.sport,
-              data.equipeA,
-              data.equipeB,
-              data.date
-            );
-            break;
-          default:
-            throw new Error("Type d'évènement inconnu");
-            break;
+        get affichage() {
+          return this.#_type;
         }
       }
-    }
 
-    events.forEach((values) => {
-      try {
-        let event = new EventFactory(values.type, values);
-        console.log(event.affichage);
-      } catch (error) {
-        console.error(error.message);
-      }
-    });
+      class ConcertEvent extends Event {
+        #_artiste;
 
-    class listRenderer {
-      #_list = [];
-      #_container;
+        constructor(date, artiste) {
+          super(date, "Concert de");
+          if (artiste === "") {
+            throw new Error("L'artiste ne peut pas être vide");
+          }
+          this.#_artiste = artiste;
+        }
 
-      constructor(container) {
-        this.#_container = container;
-      }
+        get artiste() {
+          return this.#_artiste;
+        }
 
-      addEvent(event) {
-        this.#_list.push(event);
+        get affichage() {
+          return `${super.affichage} ${this.#_artiste}.`;
+        }
       }
 
-      render() {
-        let ul = document.createElement("ul");
-        this.#_list.forEach((event) => {
-          let li = document.createElement("li");
-          li.textContent = event.affichage;
-          ul.appendChild(li);
-        });
-        this.#_container.appendChild(ul);
+      class CoursEvent extends Event{
+        #_professeur;
       }
-    }
-  </script>
-  <body></body>
+
+      class SportEvent extends Event {
+        #_equipeA;
+        #_equipeB;
+        #_sport;
+
+        constructor(sport, equipeA, equipeB, date) {
+          super(date, "Rencontre de");
+          if (sport === "") {
+            throw new Error("Le sport ne peut pas être vide");
+          }
+          this.#_sport = sport;
+          this.#_equipeA = equipeA;
+          this.#_equipeB = equipeB;
+        }
+
+        get sport() {
+          return this.#_sport;
+        }
+
+        get affichage() {
+          return `${super.affichage} ${this.#_sport} entre ${this.#_equipeA} et ${
+            this.#_equipeB
+          }.`;
+        }
+      }
+
+      class EventFactory {
+        constructor(type, data) {
+          switch (type) {
+            case "concert":
+              return new ConcertEvent(data.date, data.artist);
+              break;
+            case "sport":
+              return new SportEvent(
+                data.sport,
+                data.teamA,
+                data.teamB,
+                data.date
+              );
+              break;
+            default:
+              throw new Error("Type d'évènement inconnu");
+              break;
+          }
+        }
+      }
+
+      class listRender {
+        #container;
+        #list = [];
+
+        constructor(container) {
+          this.#container = container;
+        }
+
+        add(item) {
+          this.#list.push(item);
+        }
+
+        affichage() {
+          let ul = document.createElement("ul");
+          for (const elem of this.#list) {
+            let li = document.createElement("li");
+            li.textContent = elem.affichage;
+            ul.append(li);
+          }
+          let container = document.querySelector(this.#container);
+          container.append(ul);
+        }
+      }
+
+      let list = new listRender("body");
+      events.forEach((values) => {
+        try {
+          let event = new EventFactory(values.type, values);
+          list.add(event);
+        } catch (error) {
+          console.error(error.message);
+        }
+      });
+
+      list.affichage();
+    </script>
+  </body>
 </html>
