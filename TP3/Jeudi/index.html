@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function afficherUtisateur(json) {
+        let liste = document.querySelector(".liste__resultat");
+        json.forEach((user) => {
+          let li = document.createElement("li");
+          let strong = document.createElement("strong");
+          strong.textContent = user.name;
+          li.appendChild(strong);
+          li.append(user.email);
+          liste.appendChild(li);
+        });
+      }
+
+      function afficherUnUtilisateur(json) {
+        let resultat = document.querySelector(".resultat__recherche");
+        if (json.length === 0) {
+          resultat.textContent = "Aucun utilisateur trouvé";
+        } else {
+          resultat.textContent = `Utilisateur trouvé : ${json[0].name}`;
+        }
+      }
+
+      async function searchUsers() {
+        let url = "https://jsonplaceholder.typicode.com/users";
+        let response = await fetch(url);
+        if (response.ok) {
+          let json = await response.json();
+        } else {
+          alert("HTTP-Error: " + response.status);
+        }
+      }
+      searchUsers();
+
+      async function rechercherUtilisateur() {
+        let nomUtilisateur = prompt("Entrez le nom de l'utilisateur recherché");
+        let url = `https://jsonplaceholder.typicode.com/users?username=${nomUtilisateur}`;
+        let response = await fetch(url);
+        if (response.ok) {
+          let json = await response.json();
+          afficherUnUtilisateur(json);
+        } else {
+          alert("HTTP-Error: " + response.status);
+        }
+      }
+    </script>
+    <ul class="liste__resultat"></ul>
+    <button onclick="rechercherUtilisateur()">Rechercher</button>
+    <p class="resultat__recherche"></p>
+  </body>
+</html>
