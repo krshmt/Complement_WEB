@@ -21,10 +21,14 @@
 
       function afficherUnUtilisateur(json) {
         let resultat = document.querySelector(".resultat__recherche");
+        let resultatEmail = document.querySelector(".resultat__recherche__email");
+        let resultatAdresse = document.querySelector(".resultat__recherche__adresse");
         if (json.length === 0) {
           resultat.textContent = "Aucun utilisateur trouvé";
         } else {
           resultat.textContent = `Utilisateur trouvé : ${json[0].name}`;
+          resultatEmail.textContent = `Email : ${json[0].email}`;
+          resultatAdresse.textContent = `Adresse : ${json[0].address.street}, ${json[0].address.suite}, ${json[0].address.city}, ${json[0].address.zipcode}`;
         }
       }
 
@@ -37,7 +41,6 @@
           alert("HTTP-Error: " + response.status);
         }
       }
-      searchUsers();
 
       async function rechercherUtilisateur() {
         let nomUtilisateur = prompt("Entrez le nom de l'utilisateur recherché");
@@ -54,5 +57,7 @@
     <ul class="liste__resultat"></ul>
     <button onclick="rechercherUtilisateur()">Rechercher</button>
     <p class="resultat__recherche"></p>
+    <p class="resultat__recherche__email"></p>
+    <p class="resultat__recherche__adresse"></p>
   </body>
 </html>
