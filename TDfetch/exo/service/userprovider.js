@@ -1,4 +1,4 @@
-import { ENDPOINT } from "../config";
+import { ENDPOINT } from "../config.js";
 
 export default class UserProvider {
   static fetchUsers = async () => {
