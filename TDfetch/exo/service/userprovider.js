@@ -12,4 +12,15 @@ export default class UserProvider {
         console.error(error);
     }
   }
+
+  static fetchUser = async (id) => {
+    try{
+        const response = await fetch(`${ENDPOINT}/${id}`);
+        const json = await response.json();
+        return json;
+    }
+    catch(error){
+        console.error(error);
+    }
+  }
 }

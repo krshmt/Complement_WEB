@@ -1,3 +1,4 @@
+import { ENDPOINT } from "../config.js";
 import UserProvider from "../service/userprovider.js";
 
 export default class AllUsers {
@@ -8,7 +9,8 @@ export default class AllUsers {
         let view = "<h2>Voitures</h2><ul>";
 
         for (const user of users) {
-            view += `<li><strong>${user.Name}</strong> ${user.Origin}</li>`;
+            view += `<li><strong>${user.Name}</strong></li>`;
+            view += `<a href="` + 'http://localhost:8080/fetch.html' + `/${user.id}">Voir</a>`;
         }
         
         view += "</ul>";
@@ -19,5 +21,16 @@ export default class AllUsers {
         console.error("Error rendering users:", error);
     }
 }
+
+  async renderUnUser(id) {
+    try{
+      let user = await UserProvider.fetchUser(id);
+      let view = `<h2>${user.Origin}</h2>`;
+      let content = document.getElementById("content");
+      content.innerHTML = view;
+    }catch(error){
+      console.error("Error rendering user:", error);
+    }
+  }
 
 }
