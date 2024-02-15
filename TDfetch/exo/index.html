@@ -7,18 +7,6 @@
   </head>
   <body>
     <script>
-      function afficherUtisateur(json) {
-        let liste = document.querySelector(".liste__resultat");
-        json.forEach((user) => {
-          let li = document.createElement("li");
-          let strong = document.createElement("strong");
-          strong.textContent = user.name;
-          li.appendChild(strong);
-          li.append(user.email);
-          liste.appendChild(li);
-        });
-      }
-
       function afficherUnUtilisateur(json) {
         let resultat = document.querySelector(".resultat__recherche");
         let resultatEmail = document.querySelector(".resultat__recherche__email");

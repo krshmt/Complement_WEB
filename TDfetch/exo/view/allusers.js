@@ -13,4 +13,23 @@ export default class AllUsers {
       myList.appendChild(li);
     }
   }
+
+  async renderV2() {
+    try {
+        let users = await UserProvider.fetchUsers();
+        let view = "<h2>Users</h2><ul>";
+
+        for (const user of users) {
+            view += `<li><strong>${user.name}</strong> ${user.email}</li>`;
+        }
+        
+        view += "</ul>";
+
+        let content = document.getElementById("content");
+        content.innerHTML = view;
+    } catch (error) {
+        console.error("Error rendering users:", error);
+    }
+}
+
 }
