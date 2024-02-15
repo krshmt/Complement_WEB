@@ -5,6 +5,7 @@ export default class UserProvider {
     try{
         const response = await fetch(`${ENDPOINT}`);
         const json = await response.json();
+        console.log(response.length); 
         return json;
     }
     catch(error){
