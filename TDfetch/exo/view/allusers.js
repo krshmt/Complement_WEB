@@ -10,7 +10,7 @@ export default class AllUsers {
 
         for (const user of users) {
             view += `<li><strong>${user.Name}</strong></li>`;
-            view += `<a href="` + 'http://localhost:8080/fetch.html' + `/${user.id}">Voir</a>`;
+            view += `<button>Voir plus</button>`;
         }
         
         view += "</ul>";
@@ -21,6 +21,7 @@ export default class AllUsers {
         console.error("Error rendering users:", error);
     }
 }
+
 
   async renderUnUser(id) {
     try{
