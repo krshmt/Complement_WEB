@@ -6,18 +6,7 @@ export default class ArticleShow {
     let request = Utils.parseRequestURL();
     let post = await ArticleProvider.getArticle(request.id);
 
-    return /*html*/ `
-            <style>
-            table {
-                display: flex;
-            }
-            
-            thead, tbody {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            </style>            
+    return /*html*/ `          
             <section class="section">
                 <table>
                     <thead>
