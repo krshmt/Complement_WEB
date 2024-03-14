@@ -22,16 +22,4 @@ export default class AllUsers {
     }
 }
 
-
-  async renderUnUser(id) {
-    try{
-      let user = await UserProvider.fetchUser(id);
-      let view = `<h2>${user.Origin}</h2>`;
-      let content = document.getElementById("content");
-      content.innerHTML = view;
-    }catch(error){
-      console.error("Error rendering user:", error);
-    }
-  }
-
 }
