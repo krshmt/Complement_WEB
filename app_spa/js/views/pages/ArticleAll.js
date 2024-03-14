@@ -11,14 +11,14 @@ export default class ArticleAll {
                     /*html*/`
                     <div class="col">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${article.title}</text></svg>
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${article.Name}</text></svg>
                         <div class="card-body">
-                            <p class="card-text">${article.text ? article.text.slice(0,100) : ''}</p>
+                            <p class="card-text">${article.Name ? article.Name.slice(0,100) : ''}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                <a href="#/articles/${article.id}" class="btn btn-sm btn-outline-secondary">Voir ${article.title}</a>
+                                <a href="#/articles/${article.id}" class="btn btn-sm btn-outline-secondary">Voir fiche technique</a>
                                 </div>
-                                <small class="text-body-secondary">${article.id}</small>
+                                <small class="text-body-secondary">${article.Origin}</small>
                             </div>
                         </div>
                     </div>

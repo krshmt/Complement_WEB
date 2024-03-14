@@ -14,7 +14,7 @@ export default class Home {
                     <p class="card-text">${article.text ? article.text.slice(0, 100) : ''}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                        <a href="#/articles/${article.id}" class="btn btn-sm btn-outline-secondary">+ détail sur ${article.title}</a>
+                        <a href="#/articles/${article.id}" class="btn btn-sm btn-outline-secondary">+ détail sur ${article.name}</a>
                         </div>
                         <small class="text-body-secondary">${article.id}</small>
                     </div>
